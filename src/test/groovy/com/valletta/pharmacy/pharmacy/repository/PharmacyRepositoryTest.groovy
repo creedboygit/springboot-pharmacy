@@ -21,13 +21,13 @@ class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
         String address = "서울특별시 강남구 청담동"
         String name = "강남 약국"
         double latitude = 36.11
-        double longtitude = 128.11
+        double longitude = 128.11
 
         def pharmacy = Pharmacy.builder()
                 .pharmacyAddress(address)
                 .pharmacyName(name)
                 .latitude(latitude)
-                .longtitude(longtitude)
+                .longitude(longitude)
                 .build()
 
 //        println pharmacy.toString()
@@ -39,7 +39,7 @@ class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
         result.getPharmacyAddress() == address
         result.getPharmacyName() == name
         result.getLatitude() == latitude
-        result.getLongtitude() == longtitude
+        result.getLongitude() == longitude
     }
 
     def "PharmacyRepository saveAll"() {
@@ -48,13 +48,13 @@ class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
         String address = "서울특별시 강남구 청담동"
         String name = "강남 약국"
         double latitude = 36.11
-        double longtitude = 128.11
+        double longitude = 128.11
 
         def pharmacy = Pharmacy.builder()
                 .pharmacyAddress(address)
                 .pharmacyName(name)
                 .latitude(latitude)
-                .longtitude(longtitude)
+                .longitude(longitude)
                 .build()
 
         when:

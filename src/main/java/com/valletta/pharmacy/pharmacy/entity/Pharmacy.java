@@ -23,7 +23,7 @@ public class Pharmacy extends BaseTimeEntity {
     private String pharmacyName;
     private String pharmacyAddress;
     private double latitude;
-    private double longtitude;
+    private double longitude;
 
     public void changePharmacyAddress(String address) {
         this.pharmacyAddress = address;

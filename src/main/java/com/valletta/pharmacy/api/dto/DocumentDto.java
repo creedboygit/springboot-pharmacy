@@ -2,12 +2,14 @@ package com.valletta.pharmacy.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentDto {
@@ -19,7 +21,7 @@ public class DocumentDto {
     private double latitude;
 
     @JsonProperty("x")
-    private double longtitude;
+    private double longitude;
 
     @Override
     public String toString() {

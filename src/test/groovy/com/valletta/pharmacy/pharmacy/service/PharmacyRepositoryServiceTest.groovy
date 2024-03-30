@@ -63,13 +63,13 @@ class PharmacyRepositoryServiceTest extends AbstractIntegrationContainerBaseTest
         String address = "서울 특별시 강남구 청담동"
         String name = "강남 약국"
         double latitude = 36.11
-        double longtitude = 128.11
+        double longitude = 128.11
 
         def pharmacy = Pharmacy.builder()
                 .pharmacyAddress(address)
                 .pharmacyName(name)
                 .latitude(latitude)
-                .longtitude(longtitude)
+                .longitude(longitude)
                 .build()
 
         when:
@@ -89,13 +89,13 @@ class PharmacyRepositoryServiceTest extends AbstractIntegrationContainerBaseTest
         String modifiedAddress = "서울특별시 서초구 양재동"
         String name = "강남 약국"
         double latitude = 36.11
-        double longtitude = 128.11
+        double longitude = 128.11
 
         def input = Pharmacy.builder()
                 .pharmacyAddress(inputAddress)
                 .pharmacyName(name)
                 .latitude(latitude)
-                .longtitude(longtitude)
+                .longitude(longitude)
                 .build()
 
         when:
