@@ -1,5 +1,6 @@
 package com.valletta.pharmacy.api.service
 
+
 import spock.lang.Specification
 
 import java.nio.charset.StandardCharsets
@@ -14,7 +15,7 @@ class KakaoUriBuilderServiceTest extends Specification {
 
     def "buildUriByAddressSearch - 한글 파라미터의 경우 정상적으로 인코딩"() {
         given:
-        String address = "서울시 중구"
+        String address = "서울시 강남구"
         def charset = StandardCharsets.UTF_8
 
         when:
@@ -23,6 +24,6 @@ class KakaoUriBuilderServiceTest extends Specification {
 
         then:
 //        println uri
-        decodedResult == "https://dapi.kakao.com/v2/local/search/address.json?query=서울시 중구"
+        decodedResult == "https://dapi.kakao.com/v2/local/search/address.json?query=서울시 강남구"
     }
 }
