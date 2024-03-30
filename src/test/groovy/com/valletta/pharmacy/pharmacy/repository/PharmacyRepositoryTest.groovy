@@ -9,6 +9,10 @@ class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
     @Autowired
     private PharmacyRepository pharmacyRepository
 
+    def setup() {
+        pharmacyRepository.deleteAll()
+    }
+
     def "PharmacyRepository save"() {
 
         given:
@@ -34,5 +38,28 @@ class PharmacyRepositoryTest extends AbstractIntegrationContainerBaseTest {
         result.getPharmacyName() == name
         result.getLatitude() == latitude
         result.getLongtitude() == longtitude
+    }
+
+    def "PharmacyRepository saveAll"() {
+
+        given:
+        String address = "서울특별시 강남구 청담동"
+        String name = "강남 약국"
+        double latitude = 36.11
+        double longtitude = 128.11
+
+        def pharmacy = Pharmacy.builder()
+                .pharmacyAddress(address)
+                .pharmacyName(name)
+                .latitude(latitude)
+                .longtitude(longtitude)
+                .build()
+
+        when:
+        pharmacyRepository.saveAll(Arrays.asList(pharmacy))
+        def result = pharmacyRepository.findAll()
+
+        then:
+        result.size() == 1
     }
 }
