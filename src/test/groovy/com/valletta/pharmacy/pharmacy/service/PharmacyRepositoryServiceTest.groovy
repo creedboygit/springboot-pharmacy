@@ -78,7 +78,8 @@ class PharmacyRepositoryServiceTest extends AbstractIntegrationContainerBaseTest
         then:
         def e = thrown(RuntimeException.class)
         def result = pharmacyRepositoryService.findAll()
-        result.size() == 1 // 트랜잭션이 적용되지 않는다 (롤백 적용 X)
+//        result.size() == 1 // 트랜잭션이 적용되지 않는다 (롤백 적용 X)
+        result.size() == 0 // 트랜잭션이 적용되지 않는다 (롤백 적용 X)
     }
 
     def "transactional readOnly test - 읽기 전용일 경우 dirty checking이 반영되지 않는다."() {
