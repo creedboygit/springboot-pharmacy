@@ -1,6 +1,7 @@
 package com.valletta.pharmacy.direction.service;
 
 import com.valletta.pharmacy.api.dto.DocumentDto;
+import com.valletta.pharmacy.api.service.KakaoCategorySearchService;
 import com.valletta.pharmacy.direction.entity.Direction;
 import com.valletta.pharmacy.direction.repository.DirectionRepository;
 import com.valletta.pharmacy.pharmacy.service.PharmacySearchService;
@@ -23,9 +24,13 @@ public class DirectionService {
     private static final int MAX_SEARCH_COUNT = 3; // 약국 최대 검색 갯수
     private static final double RADIUS_KM = 10.0; // 반경 10km 이내
 
+    private static final double METER_TO_KILOMETER = 0.001; // 미터를 킬로미터로 변환할 때 곱해줄 숫자
+
     private final PharmacySearchService pharmacySearchService;
 
     private final DirectionRepository directionRepository;
+
+    private final KakaoCategorySearchService kakaoCategorySearchService;
 
     @Transactional
     public List<Direction> saveAll(List<Direction> directionList) {
@@ -59,6 +64,32 @@ public class DirectionService {
                     )
                     .build())
             .filter(direction -> direction.getDistance() <= RADIUS_KM)
+            .sorted(Comparator.comparing(Direction::getDistance))
+            .limit(MAX_SEARCH_COUNT)
+            .collect(Collectors.toList());
+    }
+
+    // pharmacy search by category kakao api
+    public List<Direction> buildDirectionListByCategoryApi(DocumentDto inputDocumentDto) {
+
+        if (Objects.isNull(inputDocumentDto)) {
+            return Collections.emptyList();
+        }
+
+        return kakaoCategorySearchService
+            .requestPharmacyCategorySearch(inputDocumentDto.getLatitude(), inputDocumentDto.getLongitude(), RADIUS_KM)
+            .getDocumentList()
+            .stream().map(resultDocumentDto ->
+                Direction.builder()
+                    .inputAddress(inputDocumentDto.getAddressName())
+                    .inputLatitude(inputDocumentDto.getLatitude())
+                    .inputLongitude(inputDocumentDto.getLongitude())
+                    .targetPharmacyName(resultDocumentDto.getPlaceName())
+                    .targetLatitude(resultDocumentDto.getLatitude())
+                    .targetLongitude(resultDocumentDto.getLongitude())
+                    .distance(resultDocumentDto.getDistance() * METER_TO_KILOMETER) // km 단위
+                    .build())
+            .filter(direction -> direction.getDistance() <= RADIUS_KM * METER_TO_KILOMETER)
             .sorted(Comparator.comparing(Direction::getDistance))
             .limit(MAX_SEARCH_COUNT)
             .collect(Collectors.toList());
