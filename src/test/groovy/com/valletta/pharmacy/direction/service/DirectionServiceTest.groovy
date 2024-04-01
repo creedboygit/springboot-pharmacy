@@ -1,6 +1,8 @@
 package com.valletta.pharmacy.direction.service
 
 import com.valletta.pharmacy.api.dto.DocumentDto
+import com.valletta.pharmacy.api.service.KakaoCategorySearchService
+import com.valletta.pharmacy.direction.repository.DirectionRepository
 import com.valletta.pharmacy.pharmacy.dto.PharmacyDto
 import com.valletta.pharmacy.pharmacy.service.PharmacySearchService
 import spock.lang.Specification
@@ -9,7 +11,11 @@ class DirectionServiceTest extends Specification {
 
     private PharmacySearchService pharmacySearchService = Mock()
 
-    private DirectionService directionService = new DirectionService(pharmacySearchService)
+    private DirectionRepository directionRepository = Mock();
+
+    private final KakaoCategorySearchService kakaoCategorySearchService = Mock();
+
+    private DirectionService directionService = new DirectionService(pharmacySearchService, directionRepository, kakaoCategorySearchService)
 
     private List<PharmacyDto> pharmacyList
 
