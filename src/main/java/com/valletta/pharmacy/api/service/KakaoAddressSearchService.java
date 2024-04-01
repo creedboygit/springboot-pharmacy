@@ -27,7 +27,7 @@ public class KakaoAddressSearchService {
     private String kakaoRestApiKey;
 
     @Retryable(
-        retryFor = {RuntimeException.class},
+        value = {RuntimeException.class},
         maxAttempts = 2,
         backoff = @Backoff(delay = 2000)
     )
