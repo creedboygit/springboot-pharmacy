@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.4'
+    id 'org.springframework.boot' version '2.7.13'
     id 'io.spring.dependency-management' version '1.1.4'
     id 'groovy'
 }
@@ -9,7 +9,7 @@ group = 'com.valletta'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '21'
+    sourceCompatibility = '17'
 }
 
 configurations {
@@ -35,6 +35,9 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // handlebars
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.4.1'
 
     testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
     testImplementation 'org.spockframework:spock-spring:2.4-M1-groovy-4.0'
