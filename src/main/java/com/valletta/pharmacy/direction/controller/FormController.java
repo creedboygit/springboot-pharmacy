@@ -16,7 +16,7 @@ public class FormController {
     private final PharmacyRecommendationService pharmacyRecommendationService;
 
     @GetMapping("/")
-    public String index() {
+    public String main() {
         return "main";
     }
 
