@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,6 +23,11 @@ public class PharmacyRecommendationService {
 
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final DirectionService directionService;
+
+    private static final String COMMA = ",";
+    private static final String ROAD_VIEW_BASE_URL = "https://map.kakao.com/link/roadview/";
+    private static final String DIRECTION_BASE_URL = "https://map.kakao.com/link/map/";
+
 
     public List<OutputDto> recommendPharmacyList(String address) {
 
@@ -45,12 +51,33 @@ public class PharmacyRecommendationService {
 
     private OutputDto convertToOutputDto(Direction direction) {
 
+        // directUrl 만들기
+        String params = makeParams(direction.getTargetPharmacyName(), direction.getTargetLatitude(), direction.getTargetLongitude());
+        String directUrl = UriComponentsBuilder.fromHttpUrl(DIRECTION_BASE_URL + params).toUriString();
+
+        // roadViewUrl 만들기
+        String roadViewUrl = makeRoadViewUrl(direction.getTargetLatitude(), direction.getTargetLongitude());
+
+        log.info("direction params: {}, url: {}", params, directUrl);
+
         return OutputDto.builder()
             .pharmacyAddress(direction.getTargetAddress())
             .pharmacyName(direction.getTargetPharmacyName())
-            .directionUrl("todo") // TODO
-            .roadViewUrl("todo") // TODO
+            .directionUrl(directUrl)
+//            .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetLatitude() + "," + direction.getTargetLongitude())
+            .roadViewUrl(roadViewUrl)
             .distance(String.format("%.2f km", direction.getDistance()))
             .build();
+    }
+
+    private static String makeParams(String name, double latitude, double longitude) {
+        return String.join(COMMA,
+            name,
+            String.valueOf(latitude),
+            String.valueOf(longitude));
+    }
+
+    private String makeRoadViewUrl(double latitude, double longitude) {
+        return ROAD_VIEW_BASE_URL + String.join(COMMA, String.valueOf(latitude), String.valueOf(longitude));
     }
 }
