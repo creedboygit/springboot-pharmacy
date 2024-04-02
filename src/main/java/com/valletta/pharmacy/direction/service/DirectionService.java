@@ -89,8 +89,8 @@ public class DirectionService {
                     .targetLongitude(resultDocumentDto.getLongitude())
                     .distance(resultDocumentDto.getDistance() * METER_TO_KILOMETER) // km 단위
                     .build())
-            .filter(direction -> direction.getDistance() <= RADIUS_KM * METER_TO_KILOMETER)
-            .sorted(Comparator.comparing(Direction::getDistance))
+//            .filter(direction -> direction.getDistance() <= RADIUS_KM * METER_TO_KILOMETER)
+//            .sorted(Comparator.comparing(Direction::getDistance))
             .limit(MAX_SEARCH_COUNT)
             .collect(Collectors.toList());
     }
