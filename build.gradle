@@ -36,6 +36,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    // base62
+    implementation 'io.seruco.encoding:base62:0.1.3'
+
     // handlebars
     implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.4.1'
 
