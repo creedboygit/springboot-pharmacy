@@ -28,7 +28,7 @@ class DirectionControllerTest extends Specification {
         String redirectUrl = "https://map.kakao.com/link/map/pharmacy,38.11.128.11"
 
         when:
-        directionService.findById(encodedId) >> redirectUrl
+        directionService.findDirectionUrlById(encodedId) >> redirectUrl
         def result = mockMvc.perform(get("/dir/{encodedId}", encodedId))
 
         then:
