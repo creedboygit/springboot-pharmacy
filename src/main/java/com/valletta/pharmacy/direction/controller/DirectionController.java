@@ -19,6 +19,8 @@ public class DirectionController {
 
         String directUrl = directionService.findDirectionUrlById(encodedId);
 
+        log.info("[DirectionController searchDirection] direction url: {}", directUrl);
+
         return "redirect:" + directUrl;
     }
 }
