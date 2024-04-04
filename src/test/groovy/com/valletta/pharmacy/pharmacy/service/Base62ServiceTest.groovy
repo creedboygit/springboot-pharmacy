@@ -15,7 +15,7 @@ class Base62ServiceTest extends Specification {
     def "check base62 encoder/decoder"() {
 
         given:
-        long num = 5
+        long num = 16
 
         when:
         def encodedId = base62Service.encodeDirectionId(num)
