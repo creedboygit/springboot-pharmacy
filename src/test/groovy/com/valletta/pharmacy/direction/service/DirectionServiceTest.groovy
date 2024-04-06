@@ -76,7 +76,7 @@ class DirectionServiceTest extends Specification {
                         .longitude(127.236707811313)
                         .build())
 
-        def addressName = "서울 강남구 청담동"
+        def addressName = "서울 강남구 청담동 11"
         double inputLatitude = 37.5960650456809
         double inputLongitude = 127.037033003036
 
