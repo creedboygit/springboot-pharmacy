@@ -70,7 +70,7 @@ class DirectionServiceTest extends Specification {
         pharmacyList.add(
                 PharmacyDto.builder()
                         .id(3L)
-                        .pharmacyName("경기약국")
+                        .pharmacyName("청담약국")
                         .pharmacyAddress("주소3")
                         .latitude(37.3825107393401)
                         .longitude(127.236707811313)
