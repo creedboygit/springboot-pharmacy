@@ -1,5 +1,6 @@
 package com.valletta.pharmacy.pharmacy.service;
 
+import com.valletta.pharmacy.cache.PharmacyRedisTemplateService;
 import com.valletta.pharmacy.pharmacy.dto.PharmacyDto;
 import com.valletta.pharmacy.pharmacy.entity.Pharmacy;
 import java.util.List;
@@ -14,10 +15,16 @@ import org.springframework.stereotype.Service;
 public class PharmacySearchService {
 
     private final PharmacyRepositoryService pharmacyRepositoryService;
+    private final PharmacyRedisTemplateService pharmacyRedisTemplateService;
 
     public List<PharmacyDto> searchPharmacyDtoList() {
 
         // redis
+        List<PharmacyDto> pharmacyDtoList = pharmacyRedisTemplateService.findAll();
+        if (!pharmacyDtoList.isEmpty()) {
+            log.info("redis findAll success!");
+            return pharmacyDtoList;
+        }
 
         // db
         return pharmacyRepositoryService.findAll()

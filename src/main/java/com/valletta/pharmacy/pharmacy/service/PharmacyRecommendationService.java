@@ -43,8 +43,8 @@ public class PharmacyRecommendationService {
 
         DocumentDto documentDto = kakaoApiResponseDto.getDocumentList().get(0);
 
-//        List<Direction> directionList = directionService.buildDirectionList(documentDto); // data.go.kr 정보 이용
-        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto); // 카카오 카테고리 API 이용
+        List<Direction> directionList = directionService.buildDirectionList(documentDto); // data.go.kr 정보 이용
+//        List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto); // 카카오 카테고리 API 이용
 
         return directionService.saveAll(directionList)
             .stream()
@@ -61,7 +61,6 @@ public class PharmacyRecommendationService {
             .pharmacyAddress(direction.getTargetAddress())
             .pharmacyName(direction.getTargetPharmacyName())
             .directionUrl(baseUrl + base62Service.encodeDirectionId(direction.getId()))
-//            .roadViewUrl(ROAD_VIEW_BASE_URL + direction.getTargetLatitude() + "," + direction.getTargetLongitude())
             .roadViewUrl(roadViewUrl)
             .distance(String.format("%.2f km", direction.getDistance()))
             .build();

@@ -37,7 +37,7 @@ public class PharmacyRepositoryService {
     @Transactional(readOnly = true)
     public void startReadOnlyMethod(Long id) {
         pharmacyRepository.findById(id).ifPresent(pharmacy -> {
-            pharmacy.changePharmacyAddress("서울특별시 서초구");
+            pharmacy.changePharmacyAddress("서울특별시 강남구");
         });
     }
 
